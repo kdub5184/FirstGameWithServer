@@ -99,16 +99,16 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/img/actionguyright.png":
-/*!************************************!*\
-  !*** ./src/img/actionguyright.png ***!
-  \************************************/
+/***/ "./src/img/actionguyrightcc.png":
+/*!**************************************!*\
+  !*** ./src/img/actionguyrightcc.png ***!
+  \**************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "4ec344a81e253314acb5e68e9683106f.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "9f2544139b344123045b55e57ec7ca7c.png");
 
 /***/ }),
 
@@ -122,6 +122,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "beedd89027522de93f7424558f5151d1.png");
+
+/***/ }),
+
+/***/ "./src/img/redhoodrightnobg.png":
+/*!**************************************!*\
+  !*** ./src/img/redhoodrightnobg.png ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "81f7577eb7112f8cf74eb51f9c3d654f.png");
 
 /***/ }),
 
@@ -149,13 +162,15 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_iceplatform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../img/iceplatform.png */ "./src/img/iceplatform.png");
 /* harmony import */ var _img_whiteforestbig_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/whiteforestbig.png */ "./src/img/whiteforestbig.png");
-/* harmony import */ var _img_actionguyright_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/actionguyright.png */ "./src/img/actionguyright.png");
+/* harmony import */ var _img_actionguyrightcc_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/actionguyrightcc.png */ "./src/img/actionguyrightcc.png");
 /* harmony import */ var _img_actionguyleft_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/actionguyleft.png */ "./src/img/actionguyleft.png");
+/* harmony import */ var _img_redhoodrightnobg_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/redhoodrightnobg.png */ "./src/img/redhoodrightnobg.png");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -183,15 +198,19 @@ var Player = /*#__PURE__*/function () {
       x: 0,
       y: 1
     };
-    this.width = 30;
-    this.height = 30;
+    this.width = 70;
+    this.height = 190;
+    this.image = createImage(_img_actionguyrightcc_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
   }
 
   _createClass(Player, [{
     key: "draw",
     value: function draw() {
-      c.fillStyle = 'blue';
-      c.fillRect(this.position.x, this.position.y, this.width, this.height);
+      c.drawImage(this.image, 190, 0, 66, 140, this.position.x, this.position.y, this.width, this.height); //c.fillStyle = 'blue'
+      //c.fillRect(this.position.x, this.position.y, this.width, this.height)
+      //c.beginPath();
+      //c.rect(100, 420, 66, 155);
+      //c.stroke();
     }
   }, {
     key: "update",

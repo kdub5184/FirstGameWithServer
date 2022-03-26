@@ -1,7 +1,8 @@
 import platform from '../img/iceplatform.png'
 import whiteforest from '../img/whiteforestbig.png'
-import heroright from '../img/actionguyright.png'
+import heroright from '../img/actionguyrightcc.png'
 import herolift from '../img/actionguyleft.png'
+import redhood from '../img/redhoodrightnobg.png'
 
 
 const canvas = document.querySelector('canvas')
@@ -29,13 +30,30 @@ class Player {
             y: 1
         }
 
-        this.width = 30
-        this.height = 30
+        this.width = 70
+        this.height = 190
+
+        this.image = createImage(heroright)
     }
 
     draw(){
-        c.fillStyle = 'blue'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+
+        c.drawImage(
+            this.image, 
+            190,
+            0,
+            66,
+            140,
+            this.position.x, 
+            this.position.y, 
+            this.width, 
+            this.height)
+
+        //c.fillStyle = 'blue'
+        //c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        //c.beginPath();
+        //c.rect(100, 420, 66, 155);
+        //c.stroke();
     }
 
     update() {
