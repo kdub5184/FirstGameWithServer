@@ -1,11 +1,17 @@
 import platform from '../img/iceplatform.png'
+import whiteforest from '../img/whiteforestbig.png'
 console.log(platform)
+
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
-canvas.width = innerWidth
-canvas.height = innerHeight
+//full size
+//canvas.width = innerWidth
+//canvas.height = innerHeight
+
+canvas.width = 1200
+canvas.height = 675
 
 const gravity = 0.6
 
@@ -62,15 +68,62 @@ class Platform {
     }
 }
 
-const image = new Image()
-image.src = platform
-console.log(image)
+class GenericObject {
+  constructor({x,y, image}) {
+      this.position = {
+          x: x,
+          y: y,
+          image: ''
+      }
+
+      this.image = image
+      this.width = this.image.width
+      this.height = this.image.height
+  }
+
+  draw() {
+      c.drawImage(this.image, this.position.x, this.position.y)
+      //c.fillStyle = 'green'
+      //c.fillRect(this.position.x, this.position.y, this.width, this.height)
+  }
+}
+
+function createImage(imageSrc) {
+  const image = new Image()
+  image.src = imageSrc
+  return image
+}
+
+const platformImage = createImage(platform)
 
 const player = new Player()
-const platforms = [new Platform({x:0, y:canvas.height - image.height, image: image}),
-                    new Platform({x: 350, y:canvas.height - 250, image: image}),
-                    new Platform({x: 800, y:canvas.height - 450, image: image})
+const platforms = [new Platform({x:0, y:canvas.height - platformImage.height, image: platformImage}),
+                    new Platform({x: 350, y:canvas.height - 250, image: platformImage}),
+                    new Platform({x: 1000, y:canvas.height - 450, image: platformImage}),
+                    new Platform({x: 1550, y:canvas.height - 250, image: platformImage}),
+                    new Platform({x: 2000, y:canvas.height - 450, image: platformImage}),
+                    new Platform({x: 2250, y:canvas.height - 250, image: platformImage}),
+                    new Platform({x: 2480, y:canvas.height - 450, image: platformImage}),
+                    new Platform({x: 3000+platformImage.width, y:canvas.height - 100, image: platformImage}),
+                    new Platform({x: 3000+platformImage.width*2, y:canvas.height - 100, image: platformImage}),
+                    new Platform({x: 3000+platformImage.width*3, y:canvas.height - 100, image: platformImage}),
+                    new Platform({x: 3450+platformImage.width*3, y:canvas.height - 450, image: platformImage}),
                 ]
+
+const backgroundImage = createImage(whiteforest)
+
+const genericObjects = [ 
+  new GenericObject ({
+    x:0, y:0, image: backgroundImage
+  }),
+  new GenericObject ({
+    x:backgroundImage.width -2, y: 0, image: backgroundImage
+  }),
+  new GenericObject ({
+    x:backgroundImage.width*2 -2, y: 0, image: backgroundImage
+  })
+]
+
 
 const keys = {
     right:{
@@ -91,12 +144,18 @@ let scrollOffset = 0
 //MAIN ANIMATION LOOP
 function animate(){
     requestAnimationFrame(animate)
-    c.clearRect(0, 0, canvas.width, canvas.height)
-    player.update()
+    c.fillStyle = 'White'
+    c.fillRect(0, 0, canvas.width, canvas.height)
+
+    genericObjects.forEach(genericObject => {
+      genericObject.draw()
+    })
+    
     platforms.forEach(platform => {
         platform.draw()
     })
     
+    player.update()
     
     //myGamepad = navigator.getGamepads()[0]; // use the first gamepad (xbox-only)
     
@@ -116,20 +175,29 @@ function animate(){
                 platform.position.x -= 5
                 scrollOffset += 5
             })
+            genericObjects.forEach(genericObject => {
+              genericObject.position.x -= 3
+              scrollOffset += 3
+          })
         }else if (keys.left.pressed){
             
             platforms.forEach(platform => {
                 platform.position.x += 5
                 scrollOffset -= 5
             })
+            genericObjects.forEach(genericObject => {
+              genericObject.position.x -= 3
+              scrollOffset += 3
+          })
         }
 
     }
 
-    if(scrollOffset > 3000){
-        player.velocity.x = 0
-        console.log("you win")
-    }
+    // way of winning
+    // if(scrollOffset > 3000){
+    //     player.velocity.x = 0
+    //     console.log("you win")
+    // }
 
     
 

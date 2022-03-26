@@ -99,6 +99,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/img/whiteforestbig.png":
+/*!************************************!*\
+  !*** ./src/img/whiteforestbig.png ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "45ef92f0c98d6aaed9873c590d2f4b38.png");
+
+/***/ }),
+
 /***/ "./src/js/canvas.js":
 /*!**************************!*\
   !*** ./src/js/canvas.js ***!
@@ -109,6 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_iceplatform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../img/iceplatform.png */ "./src/img/iceplatform.png");
+/* harmony import */ var _img_whiteforestbig_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/whiteforestbig.png */ "./src/img/whiteforestbig.png");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -116,11 +130,15 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+
 console.log(_img_iceplatform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var canvas = document.querySelector('canvas');
-var c = canvas.getContext('2d');
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+var c = canvas.getContext('2d'); //full size
+//canvas.width = innerWidth
+//canvas.height = innerHeight
+
+canvas.width = 1200;
+canvas.height = 675;
 var gravity = 0.6;
 
 var Player = /*#__PURE__*/function () {
@@ -187,22 +205,101 @@ var Platform = /*#__PURE__*/function () {
   return Platform;
 }();
 
-var image = new Image();
-image.src = _img_iceplatform_png__WEBPACK_IMPORTED_MODULE_0__["default"];
-console.log(image);
+var GenericObject = /*#__PURE__*/function () {
+  function GenericObject(_ref2) {
+    var x = _ref2.x,
+        y = _ref2.y,
+        image = _ref2.image;
+
+    _classCallCheck(this, GenericObject);
+
+    this.position = {
+      x: x,
+      y: y,
+      image: ''
+    };
+    this.image = image;
+    this.width = this.image.width;
+    this.height = this.image.height;
+  }
+
+  _createClass(GenericObject, [{
+    key: "draw",
+    value: function draw() {
+      c.drawImage(this.image, this.position.x, this.position.y); //c.fillStyle = 'green'
+      //c.fillRect(this.position.x, this.position.y, this.width, this.height)
+    }
+  }]);
+
+  return GenericObject;
+}();
+
+function createImage(imageSrc) {
+  var image = new Image();
+  image.src = imageSrc;
+  return image;
+}
+
+var platformImage = createImage(_img_iceplatform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var player = new Player();
 var platforms = [new Platform({
   x: 0,
-  y: canvas.height - image.height,
-  image: image
+  y: canvas.height - platformImage.height,
+  image: platformImage
 }), new Platform({
   x: 350,
   y: canvas.height - 250,
-  image: image
+  image: platformImage
 }), new Platform({
-  x: 800,
+  x: 1000,
   y: canvas.height - 450,
-  image: image
+  image: platformImage
+}), new Platform({
+  x: 1550,
+  y: canvas.height - 250,
+  image: platformImage
+}), new Platform({
+  x: 2000,
+  y: canvas.height - 450,
+  image: platformImage
+}), new Platform({
+  x: 2250,
+  y: canvas.height - 250,
+  image: platformImage
+}), new Platform({
+  x: 2480,
+  y: canvas.height - 450,
+  image: platformImage
+}), new Platform({
+  x: 3000 + platformImage.width,
+  y: canvas.height - 100,
+  image: platformImage
+}), new Platform({
+  x: 3000 + platformImage.width * 2,
+  y: canvas.height - 100,
+  image: platformImage
+}), new Platform({
+  x: 3000 + platformImage.width * 3,
+  y: canvas.height - 100,
+  image: platformImage
+}), new Platform({
+  x: 3450 + platformImage.width * 3,
+  y: canvas.height - 450,
+  image: platformImage
+})];
+var backgroundImage = createImage(_img_whiteforestbig_png__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var genericObjects = [new GenericObject({
+  x: 0,
+  y: 0,
+  image: backgroundImage
+}), new GenericObject({
+  x: backgroundImage.width - 2,
+  y: 0,
+  image: backgroundImage
+}), new GenericObject({
+  x: backgroundImage.width * 2 - 2,
+  y: 0,
+  image: backgroundImage
 })];
 var keys = {
   right: {
@@ -221,11 +318,15 @@ var scrollOffset = 0; //MAIN ANIMATION LOOP
 
 function animate() {
   requestAnimationFrame(animate);
-  c.clearRect(0, 0, canvas.width, canvas.height);
-  player.update();
+  c.fillStyle = 'White';
+  c.fillRect(0, 0, canvas.width, canvas.height);
+  genericObjects.forEach(function (genericObject) {
+    genericObject.draw();
+  });
   platforms.forEach(function (platform) {
     platform.draw();
-  }); //myGamepad = navigator.getGamepads()[0]; // use the first gamepad (xbox-only)
+  });
+  player.update(); //myGamepad = navigator.getGamepads()[0]; // use the first gamepad (xbox-only)
   //keyboard nav
 
   if (keys.right.pressed && player.position.x < 500) {
@@ -242,18 +343,26 @@ function animate() {
         platform.position.x -= 5;
         scrollOffset += 5;
       });
+      genericObjects.forEach(function (genericObject) {
+        genericObject.position.x -= 3;
+        scrollOffset += 3;
+      });
     } else if (keys.left.pressed) {
       platforms.forEach(function (platform) {
         platform.position.x += 5;
         scrollOffset -= 5;
       });
+      genericObjects.forEach(function (genericObject) {
+        genericObject.position.x -= 3;
+        scrollOffset += 3;
+      });
     }
-  }
-
-  if (scrollOffset > 3000) {
-    player.velocity.x = 0;
-    console.log("you win");
-  } //Game pad code
+  } // way of winning
+  // if(scrollOffset > 3000){
+  //     player.velocity.x = 0
+  //     console.log("you win")
+  // }
+  //Game pad code
   // if (  && player.position.x < 500) {
   //     console.log('move right')
   //     player.velocity.x = 5
@@ -292,8 +401,8 @@ function animate() {
 }
 
 animate();
-addEventListener('keydown', function (_ref2) {
-  var keyCode = _ref2.keyCode;
+addEventListener('keydown', function (_ref3) {
+  var keyCode = _ref3.keyCode;
 
   //console.log(keyCode)
   switch (keyCode) {
@@ -318,8 +427,8 @@ addEventListener('keydown', function (_ref2) {
       break;
   }
 });
-addEventListener('keyup', function (_ref3) {
-  var keyCode = _ref3.keyCode;
+addEventListener('keyup', function (_ref4) {
+  var keyCode = _ref4.keyCode;
 
   //console.log(keyCode)
   switch (keyCode) {
