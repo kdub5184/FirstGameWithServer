@@ -1,6 +1,7 @@
 import platform from '../img/iceplatform.png'
 import whiteforest from '../img/whiteforestbig.png'
-console.log(platform)
+import heroright from '../img/actionguyright.png'
+import herolift from '../img/actionguyleft.png'
 
 
 const canvas = document.querySelector('canvas')

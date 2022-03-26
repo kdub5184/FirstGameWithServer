@@ -86,6 +86,32 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/img/actionguyleft.png":
+/*!***********************************!*\
+  !*** ./src/img/actionguyleft.png ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "69b634ad1c3cd9f8d49293986e8a67f9.png");
+
+/***/ }),
+
+/***/ "./src/img/actionguyright.png":
+/*!************************************!*\
+  !*** ./src/img/actionguyright.png ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "4ec344a81e253314acb5e68e9683106f.png");
+
+/***/ }),
+
 /***/ "./src/img/iceplatform.png":
 /*!*********************************!*\
   !*** ./src/img/iceplatform.png ***!
@@ -123,6 +149,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_iceplatform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../img/iceplatform.png */ "./src/img/iceplatform.png");
 /* harmony import */ var _img_whiteforestbig_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/whiteforestbig.png */ "./src/img/whiteforestbig.png");
+/* harmony import */ var _img_actionguyright_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/actionguyright.png */ "./src/img/actionguyright.png");
+/* harmony import */ var _img_actionguyleft_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/actionguyleft.png */ "./src/img/actionguyleft.png");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -131,7 +159,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-console.log(_img_iceplatform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d'); //full size
 //canvas.width = innerWidth
