@@ -217,9 +217,9 @@ var keys = {
 };
 var myGamepad;
 var counter;
-var scrollOffset = 0;
+var scrollOffset = 0; //MAIN ANIMATION LOOP
 
-function animate(counter) {
+function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
   player.update();

@@ -88,7 +88,8 @@ let myGamepad
 var counter
 let scrollOffset = 0
 
-function animate(counter, ){
+//MAIN ANIMATION LOOP
+function animate(){
     requestAnimationFrame(animate)
     c.clearRect(0, 0, canvas.width, canvas.height)
     player.update()
@@ -165,7 +166,6 @@ function animate(counter, ){
     // }
 
     //tracking collion on platform
-
     platforms.forEach(platform => {
         if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width){
             player.velocity.y = 0
