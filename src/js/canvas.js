@@ -164,13 +164,16 @@ function animate(){
     if (keys.right.pressed && player.position.x < 500) {
         console.log('move right')
         player.velocity.x = player.speed
-    } else if(keys.left.pressed && player.position.x > 100) {
+    } else if(keys.left.pressed && player.position.x > 100  || keys.left.pressed && scrollOffset === 0 && player.position.x > 0) {
         console.log("move left")
+        //&& player.position.x > 100  || keys.left.pressed && scrollOffset === 0 && player.position.x > 0 
         player.velocity.x = -player.speed
     } else {
         player.velocity.x = 0
 
         if(keys.right.pressed){
+
+            scrollOffset += player.speed
             
             platforms.forEach(platform => {
                 platform.position.x -= player.speed
@@ -180,15 +183,17 @@ function animate(){
               genericObject.position.x -= player.speed * .66
               scrollOffset += player.speed * .66
           })
-        }else if (keys.left.pressed){
+        }else if (keys.left.pressed && scrollOffset > 0){
+
+            scrollOffset -=player.speed
             
             platforms.forEach(platform => {
                 platform.position.x += player.speed
                 scrollOffset -= player.speed
             })
             genericObjects.forEach(genericObject => {
-              genericObject.position.x -= player.speed * .66
-              scrollOffset += player.speed * .66
+              genericObject.position.x += player.speed * .66
+              scrollOffset -= player.speed * .66
           })
         }
 
@@ -237,6 +242,7 @@ function animate(){
     //tracking collion on platform
     platforms.forEach(platform => {
         if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width){
+            console.log('checking platform detectiondd')
             player.velocity.y = 0
         }
     })

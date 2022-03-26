@@ -145,6 +145,7 @@ var Player = /*#__PURE__*/function () {
   function Player() {
     _classCallCheck(this, Player);
 
+    this.speed = 6;
     this.position = {
       x: 100,
       y: 100
@@ -331,30 +332,33 @@ function animate() {
 
   if (keys.right.pressed && player.position.x < 500) {
     console.log('move right');
-    player.velocity.x = 5;
-  } else if (keys.left.pressed && player.position.x > 100) {
-    console.log("move left");
-    player.velocity.x = -5;
+    player.velocity.x = player.speed;
+  } else if (keys.left.pressed && player.position.x > 100 || keys.left.pressed && scrollOffset === 0 && player.position.x > 0) {
+    console.log("move left"); //&& player.position.x > 100  || keys.left.pressed && scrollOffset === 0 && player.position.x > 0 
+
+    player.velocity.x = -player.speed;
   } else {
     player.velocity.x = 0;
 
     if (keys.right.pressed) {
+      scrollOffset += player.speed;
       platforms.forEach(function (platform) {
-        platform.position.x -= 5;
-        scrollOffset += 5;
+        platform.position.x -= player.speed;
+        scrollOffset += player.speed;
       });
       genericObjects.forEach(function (genericObject) {
-        genericObject.position.x -= 3;
-        scrollOffset += 3;
+        genericObject.position.x -= player.speed * .66;
+        scrollOffset += player.speed * .66;
       });
-    } else if (keys.left.pressed) {
+    } else if (keys.left.pressed && scrollOffset > 0) {
+      scrollOffset -= player.speed;
       platforms.forEach(function (platform) {
-        platform.position.x += 5;
-        scrollOffset -= 5;
+        platform.position.x += player.speed;
+        scrollOffset -= player.speed;
       });
       genericObjects.forEach(function (genericObject) {
-        genericObject.position.x -= 3;
-        scrollOffset += 3;
+        genericObject.position.x += player.speed * .66;
+        scrollOffset -= player.speed * .66;
       });
     }
   } // way of winning
@@ -394,6 +398,7 @@ function animate() {
 
   platforms.forEach(function (platform) {
     if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
+      console.log('checking platform detectiondd');
       player.velocity.y = 0;
     }
   });
