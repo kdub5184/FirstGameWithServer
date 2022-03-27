@@ -86,16 +86,16 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/img/actionguyleft.png":
-/*!***********************************!*\
-  !*** ./src/img/actionguyleft.png ***!
-  \***********************************/
+/***/ "./src/img/actionguyleft_nobg.png":
+/*!****************************************!*\
+  !*** ./src/img/actionguyleft_nobg.png ***!
+  \****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "69b634ad1c3cd9f8d49293986e8a67f9.png");
+/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "1e74b6b499a720a607ca86a7c7309e40.png");
 
 /***/ }),
 
@@ -109,19 +109,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "9f2544139b344123045b55e57ec7ca7c.png");
-
-/***/ }),
-
-/***/ "./src/img/alignmentguy.png":
-/*!**********************************!*\
-  !*** ./src/img/alignmentguy.png ***!
-  \**********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "b5a80c01473ecaa1bfce55548baa93a3.png");
 
 /***/ }),
 
@@ -163,8 +150,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_iceplatform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../img/iceplatform.png */ "./src/img/iceplatform.png");
 /* harmony import */ var _img_whiteforestbig_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/whiteforestbig.png */ "./src/img/whiteforestbig.png");
 /* harmony import */ var _img_actionguyrightcc_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/actionguyrightcc.png */ "./src/img/actionguyrightcc.png");
-/* harmony import */ var _img_actionguyleft_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/actionguyleft.png */ "./src/img/actionguyleft.png");
-/* harmony import */ var _img_alignmentguy_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/alignmentguy.png */ "./src/img/alignmentguy.png");
+/* harmony import */ var _img_actionguyleft_nobg_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/actionguyleft_nobg.png */ "./src/img/actionguyleft_nobg.png");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -175,8 +161,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
  //import redhood from '../img/redhoodrightnobg.png'
+//import alignguy from '../img/alignmentguy.png'
 
- //import alignguy from '../img/actionguyrightcc.png'
 
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d'); //full size
@@ -204,13 +190,13 @@ var Player = /*#__PURE__*/function () {
 
     this.width = 108;
     this.height = 195;
-    this.image = createImage(_img_actionguyleft_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
+    this.image = createImage(_img_actionguyleft_nobg_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
     this.frames = 0;
     this.maxMovementFrames = 5;
     this.fakeFrames = 0;
     this.sprites = {
       stand: {
-        spriteImage: createImage(_img_alignmentguy_png__WEBPACK_IMPORTED_MODULE_4__["default"]),
+        spriteImage: createImage(_img_actionguyrightcc_png__WEBPACK_IMPORTED_MODULE_2__["default"]),
         startingPoint: 187,
         spriteSpacing: 142,
         startingPointY: 35,
@@ -219,7 +205,7 @@ var Player = /*#__PURE__*/function () {
         spriteCount: 5
       },
       standleft: {
-        spriteImage: createImage(_img_actionguyleft_png__WEBPACK_IMPORTED_MODULE_3__["default"]),
+        spriteImage: createImage(_img_actionguyleft_nobg_png__WEBPACK_IMPORTED_MODULE_3__["default"]),
         startingPoint: 20,
         spriteSpacing: 142,
         startingPointY: 35,
@@ -228,7 +214,7 @@ var Player = /*#__PURE__*/function () {
         spriteCount: 5
       },
       run: {
-        spriteImage: createImage(_img_alignmentguy_png__WEBPACK_IMPORTED_MODULE_4__["default"]),
+        spriteImage: createImage(_img_actionguyrightcc_png__WEBPACK_IMPORTED_MODULE_2__["default"]),
         startingPoint: 157,
         spriteSpacing: 142,
         startingPointY: 330,
@@ -237,7 +223,7 @@ var Player = /*#__PURE__*/function () {
         spriteCount: 6
       },
       jump: {
-        spriteImage: createImage(_img_alignmentguy_png__WEBPACK_IMPORTED_MODULE_4__["default"]),
+        spriteImage: createImage(_img_actionguyrightcc_png__WEBPACK_IMPORTED_MODULE_2__["default"]),
         startingPoint: 187,
         spriteSpacing: 142,
         startingPointY: 35,
@@ -246,7 +232,7 @@ var Player = /*#__PURE__*/function () {
         spriteCount: 4
       },
       moveleft: {
-        spriteImage: createImage(_img_actionguyleft_png__WEBPACK_IMPORTED_MODULE_3__["default"]),
+        spriteImage: createImage(_img_actionguyleft_nobg_png__WEBPACK_IMPORTED_MODULE_3__["default"]),
         startingPoint: 0,
         spriteSpacing: 142,
         startingPointY: 330,

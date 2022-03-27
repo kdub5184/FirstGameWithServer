@@ -1,10 +1,10 @@
 import platform from '../img/iceplatform.png'
 import whiteforest from '../img/whiteforestbig.png'
 import heroright from '../img/actionguyrightcc.png'
-import heroleft from '../img/actionguyleft.png'
+import heroleft from '../img/actionguyleft_nobg.png'
 //import redhood from '../img/redhoodrightnobg.png'
-import alignguy from '../img/alignmentguy.png'
-//import alignguy from '../img/actionguyrightcc.png'
+//import alignguy from '../img/alignmentguy.png'
+import alignguy from '../img/actionguyrightcc.png'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
