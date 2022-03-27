@@ -1,9 +1,10 @@
 import platform from '../img/iceplatform.png'
 import whiteforest from '../img/whiteforestbig.png'
 import heroright from '../img/actionguyrightcc.png'
-import herolift from '../img/actionguyleft.png'
-import redhood from '../img/redhoodrightnobg.png'
-
+//import herolift from '../img/actionguyleft.png'
+//import redhood from '../img/redhoodrightnobg.png'
+//import alignguy from '../img/alignmentguy.png'
+import alignguy from '../img/actionguyrightcc.png'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
@@ -15,7 +16,7 @@ const c = canvas.getContext('2d')
 canvas.width = 1200
 canvas.height = 675
 
-const gravity = 0.6
+const gravity = 0.8
 
 class Player {
     constructor() {
@@ -30,34 +31,84 @@ class Player {
             y: 1
         }
 
-        this.width = 70
-        this.height = 190
+        // this.width = 69
+        // this.height = 195
+        this.width = 108
+        this.height = 195
 
-        this.image = createImage(heroright)
+        this.image = createImage(alignguy)
+        this.frames = 1
+        this.maxMovementFrames = 4
+        this.fakeFrames = 0
+        this.sprites = {
+            stand:{
+                spriteImage: createImage(alignguy),
+                startingPoint: 187,
+                spriteSpacing: 142,
+                startingPointY: 35,
+                widthOfCrop: 65,
+                cropHeight: 108,
+                spriteCount: 5
+            },
+            run:{
+                spriteImage: createImage(alignguy),
+                startingPoint: 157,
+                spriteSpacing: 142,
+                startingPointY: 330,
+                widthOfCrop: 115,
+                cropHeight: 98,
+                spriteCount: 6
+            },
+            jump:{
+                spriteImage: createImage(alignguy),
+                startingPoint: 187,
+                spriteSpacing: 142,
+                startingPointY: 35,
+                widthOfCrop: 65,
+                cropHeight: 108,
+                spriteCount: 4
+            }
+        }
+
+        this.currentSprite = this.sprites.stand
+
     }
 
+    
     draw(){
 
         c.drawImage(
-            this.image, 
-            190,
-            0,
-            66,
-            140,
+            this.currentSprite.spriteImage, 
+            this.currentSprite.startingPoint + this.currentSprite.spriteSpacing*this.frames,
+            this.currentSprite.startingPointY,
+            this.currentSprite.widthOfCrop,
+            this.currentSprite.cropHeight,
             this.position.x, 
             this.position.y, 
             this.width, 
             this.height)
 
-        //c.fillStyle = 'blue'
-        //c.fillRect(this.position.x, this.position.y, this.width, this.height)
-        //c.beginPath();
-        //c.rect(100, 420, 66, 155);
-        //c.stroke();
+            // this.image, 
+            // 157 + (142*(this.frames)), //where crop starts 
+            // 330,
+            // 115, //width of crop
+            // 98, //crop height
+            // this.position.x, 
+            // this.position.y, 
+            // this.width, 
+            // this.height)
     }
 
     update() {
         this.draw()
+
+        if(this.fakeFrames>11){//11
+            this.frames ++
+            this.fakeFrames = 0
+        }
+        this.fakeFrames ++
+        if(this.frames > this.maxMovementFrames) this.frames = 0
+
         this.position.y += this.velocity.y
         this.position.x += this.velocity.x
         
@@ -285,6 +336,7 @@ addEventListener('keydown', ({keyCode}) => {
         case 68:
             console.log("right")
             keys.right.pressed = true
+            player.currentSprite = player.sprites.run
             break
         case 87:
             console.log("up")
@@ -307,6 +359,7 @@ addEventListener('keyup', ({keyCode}) => {
         case 68:
             console.log("right")
             keys.right.pressed = false
+            player.currentSprite = player.sprites.stand
             break
         case 87:
             console.log("up")

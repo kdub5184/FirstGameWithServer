@@ -86,19 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/img/actionguyleft.png":
-/*!***********************************!*\
-  !*** ./src/img/actionguyleft.png ***!
-  \***********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "69b634ad1c3cd9f8d49293986e8a67f9.png");
-
-/***/ }),
-
 /***/ "./src/img/actionguyrightcc.png":
 /*!**************************************!*\
   !*** ./src/img/actionguyrightcc.png ***!
@@ -122,19 +109,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "beedd89027522de93f7424558f5151d1.png");
-
-/***/ }),
-
-/***/ "./src/img/redhoodrightnobg.png":
-/*!**************************************!*\
-  !*** ./src/img/redhoodrightnobg.png ***!
-  \**************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "81f7577eb7112f8cf74eb51f9c3d654f.png");
 
 /***/ }),
 
@@ -163,8 +137,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_iceplatform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../img/iceplatform.png */ "./src/img/iceplatform.png");
 /* harmony import */ var _img_whiteforestbig_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/whiteforestbig.png */ "./src/img/whiteforestbig.png");
 /* harmony import */ var _img_actionguyrightcc_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/actionguyrightcc.png */ "./src/img/actionguyrightcc.png");
-/* harmony import */ var _img_actionguyleft_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/actionguyleft.png */ "./src/img/actionguyleft.png");
-/* harmony import */ var _img_redhoodrightnobg_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/redhoodrightnobg.png */ "./src/img/redhoodrightnobg.png");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -173,7 +145,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
-
+ //import herolift from '../img/actionguyleft.png'
+//import redhood from '../img/redhoodrightnobg.png'
+//import alignguy from '../img/alignmentguy.png'
 
 
 var canvas = document.querySelector('canvas');
@@ -183,7 +157,7 @@ var c = canvas.getContext('2d'); //full size
 
 canvas.width = 1200;
 canvas.height = 675;
-var gravity = 0.6;
+var gravity = 0.8;
 
 var Player = /*#__PURE__*/function () {
   function Player() {
@@ -197,25 +171,73 @@ var Player = /*#__PURE__*/function () {
     this.velocity = {
       x: 0,
       y: 1
-    };
-    this.width = 70;
-    this.height = 190;
+    }; // this.width = 69
+    // this.height = 195
+
+    this.width = 108;
+    this.height = 195;
     this.image = createImage(_img_actionguyrightcc_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
+    this.frames = 1;
+    this.maxMovementFrames = 4;
+    this.fakeFrames = 0;
+    this.sprites = {
+      stand: {
+        spriteImage: createImage(_img_actionguyrightcc_png__WEBPACK_IMPORTED_MODULE_2__["default"]),
+        startingPoint: 187,
+        spriteSpacing: 142,
+        startingPointY: 35,
+        widthOfCrop: 65,
+        cropHeight: 108,
+        spriteCount: 5
+      },
+      run: {
+        spriteImage: createImage(_img_actionguyrightcc_png__WEBPACK_IMPORTED_MODULE_2__["default"]),
+        startingPoint: 157,
+        spriteSpacing: 142,
+        startingPointY: 330,
+        widthOfCrop: 115,
+        cropHeight: 98,
+        spriteCount: 6
+      },
+      jump: {
+        spriteImage: createImage(_img_actionguyrightcc_png__WEBPACK_IMPORTED_MODULE_2__["default"]),
+        startingPoint: 187,
+        spriteSpacing: 142,
+        startingPointY: 35,
+        widthOfCrop: 65,
+        cropHeight: 108,
+        spriteCount: 4
+      }
+    };
+    this.currentSprite = this.sprites.stand;
   }
 
   _createClass(Player, [{
     key: "draw",
     value: function draw() {
-      c.drawImage(this.image, 190, 0, 66, 140, this.position.x, this.position.y, this.width, this.height); //c.fillStyle = 'blue'
-      //c.fillRect(this.position.x, this.position.y, this.width, this.height)
-      //c.beginPath();
-      //c.rect(100, 420, 66, 155);
-      //c.stroke();
+      c.drawImage(this.currentSprite.spriteImage, this.currentSprite.startingPoint + this.currentSprite.spriteSpacing * this.frames, this.currentSprite.startingPointY, this.currentSprite.widthOfCrop, this.currentSprite.cropHeight, this.position.x, this.position.y, this.width, this.height); // this.image, 
+      // 157 + (142*(this.frames)), //where crop starts 
+      // 330,
+      // 115, //width of crop
+      // 98, //crop height
+      // this.position.x, 
+      // this.position.y, 
+      // this.width, 
+      // this.height)
     }
   }, {
     key: "update",
     value: function update() {
       this.draw();
+
+      if (this.fakeFrames > 11) {
+        //11
+        this.frames++;
+        this.fakeFrames = 0;
+      }
+
+      this.fakeFrames++;
+      if (this.frames > this.maxMovementFrames) this.frames = 0;
       this.position.y += this.velocity.y;
       this.position.x += this.velocity.x;
       if (this.position.y + this.height + this.velocity.y <= canvas.height) this.velocity.y += gravity;else this.velocity.y = 0;
@@ -472,6 +494,7 @@ addEventListener('keydown', function (_ref3) {
     case 68:
       console.log("right");
       keys.right.pressed = true;
+      player.currentSprite = player.sprites.run;
       break;
 
     case 87:
@@ -498,6 +521,7 @@ addEventListener('keyup', function (_ref4) {
     case 68:
       console.log("right");
       keys.right.pressed = false;
+      player.currentSprite = player.sprites.stand;
       break;
 
     case 87:
