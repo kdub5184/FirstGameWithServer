@@ -1,10 +1,10 @@
 import platform from '../img/iceplatform.png'
 import whiteforest from '../img/whiteforestbig.png'
 import heroright from '../img/actionguyrightcc.png'
-//import herolift from '../img/actionguyleft.png'
+import heroleft from '../img/actionguyleft.png'
 //import redhood from '../img/redhoodrightnobg.png'
-//import alignguy from '../img/alignmentguy.png'
-import alignguy from '../img/actionguyrightcc.png'
+import alignguy from '../img/alignmentguy.png'
+//import alignguy from '../img/actionguyrightcc.png'
 
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
@@ -36,14 +36,23 @@ class Player {
         this.width = 108
         this.height = 195
 
-        this.image = createImage(alignguy)
-        this.frames = 1
-        this.maxMovementFrames = 4
+        this.image = createImage(heroleft)
+        this.frames = 0
+        this.maxMovementFrames = 5
         this.fakeFrames = 0
         this.sprites = {
             stand:{
                 spriteImage: createImage(alignguy),
                 startingPoint: 187,
+                spriteSpacing: 142,
+                startingPointY: 35,
+                widthOfCrop: 65,
+                cropHeight: 108,
+                spriteCount: 5
+            },
+            standleft:{
+                spriteImage: createImage(heroleft),
+                startingPoint: 20,
                 spriteSpacing: 142,
                 startingPointY: 35,
                 widthOfCrop: 65,
@@ -67,6 +76,15 @@ class Player {
                 widthOfCrop: 65,
                 cropHeight: 108,
                 spriteCount: 4
+            },
+            moveleft:{
+                spriteImage: createImage(heroleft),
+                startingPoint: 0,
+                spriteSpacing: 142,
+                startingPointY: 330,
+                widthOfCrop: 115,
+                cropHeight: 98,
+                spriteCount: 5
             }
         }
 
@@ -89,7 +107,7 @@ class Player {
             this.height)
 
             // this.image, 
-            // 157 + (142*(this.frames)), //where crop starts 
+            // (142*(this.frames)), //where crop starts 
             // 330,
             // 115, //width of crop
             // 98, //crop height
@@ -102,12 +120,14 @@ class Player {
     update() {
         this.draw()
 
-        if(this.fakeFrames>11){//11
+        if(this.fakeFrames>20){//11
             this.frames ++
             this.fakeFrames = 0
+            console.log("frame : " + this.frames)
         }
         this.fakeFrames ++
-        if(this.frames > this.maxMovementFrames) this.frames = 0
+        //console.log("fakeframe " + this.fakeFrames)
+        if(this.frames >= this.maxMovementFrames) this.frames = 0
 
         this.position.y += this.velocity.y
         this.position.x += this.velocity.x
@@ -312,12 +332,12 @@ function animate(){
     //tracking collion on platform
     platforms.forEach(platform => {
         if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width){
-            console.log('checking platform detectiondd')
+            //console.log('checking platform detectiondd')
             player.velocity.y = 0
         }
     })
 
-    console.log("animation loop running")
+    //console.log("animation loop running")
 }
 
 animate()
@@ -328,6 +348,7 @@ addEventListener('keydown', ({keyCode}) => {
         case 65:
             console.log(" pressing left button")
             keys.left.pressed = true
+            player.currentSprite = player.sprites.moveleft
             break
         case 83:
             console.log("down")
@@ -351,6 +372,7 @@ addEventListener('keyup', ({keyCode}) => {
         case 65:
             console.log("left")
             keys.left.pressed = false
+            player.currentSprite = player.sprites.standleft
             break
         case 83:
             console.log("down")
